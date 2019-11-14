@@ -29,7 +29,10 @@ function events:CHAT_MSG_SAY(...)
 		return
 	end
 
-	DEFAULT_CHAT_FRAME:AddMessage("Player " .. playerInfo[6] .. " wants port!");
+	playerName = playerInfo[6]
+	DEFAULT_CHAT_FRAME:AddMessage("Player " .. playerName .. " wants port!");
+
+	InviteUnit(playerName)
 end
 
 function checkWantsPort(msg)
