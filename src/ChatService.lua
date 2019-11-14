@@ -23,7 +23,21 @@ function events:CHAT_MSG_SAY(...)
 	if not select(12, ...) then return end -- don't use player-less chat events
 
 	playerInfo = {GetPlayerInfoByGUID(select(12, ...))}
-	DEFAULT_CHAT_FRAME:AddMessage("Player name found: " .. playerInfo[6]);
+	text = select(1, ...)
+	wantsPort = checkWantsPort(text)
+	if not wantsPort then
+		return
+	end
+
+	DEFAULT_CHAT_FRAME:AddMessage("Player " .. playerInfo[6] .. " wants port!");
+end
+
+function checkWantsPort(msg)
+	if(msg ~= "") then msg = string.lower(msg) end;
+	
+	containsWtb = string.find(msg, "wtb")
+	containsPort = string.find(msg, "port")
+	return containsWtb and containsPort
 end
 
 onLoad()
