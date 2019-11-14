@@ -4,3 +4,4 @@
 ## Interface: 11302
 
 MageVendor.lua
+ChatService.lua
