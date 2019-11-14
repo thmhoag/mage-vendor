@@ -8,3 +8,7 @@
 
 *.go text eol=lf
 *.sh text eol=lf
+
+*.lua text eol=crlf
+*.toc text eol=crlf
+*.xml text eol=crlf
