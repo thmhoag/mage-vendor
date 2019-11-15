@@ -4,12 +4,27 @@ local MV = MageVendor
 local Events = MV.Events
 
 function Events:CHAT_MSG_SAY(...)
+	processChat(...)
+end
+
+function Events:CHAT_MSG_YELL(...)
+	processChat(...)
+end
+
+function Events:CHAT_MSG_WHISPER(...)
+	processChat(...)
+end
+
+function processChat(...)
 	local timestamp = time()
 
 	if not MV.Options.Enabled then return end
 	if not select(12, ...) then return end -- don't use player-less chat events
 
 	playerInfo = {GetPlayerInfoByGUID(select(12, ...))}
+	playerClass = playerInfo[2]
+	if string.lower(playerClass) == "mage" then return end -- don't allow mages
+
 	text = select(1, ...)
 	wantsPort = checkWantsPort(text)
 	if not wantsPort then
