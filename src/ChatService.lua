@@ -33,6 +33,12 @@ function processChat(...)
 
 	playerName = playerInfo[6]
 	MV:Msg("Player " .. playerName .. " wants port!")
+
+	if not canInvite() then
+		MV.Error("Unable to invite " .. playerName .. "!")
+		return
+	end
+
 	InviteUnit(playerName)
 end
 
@@ -42,4 +48,8 @@ function checkWantsPort(msg)
 	containsWtb = string.find(msg, "wtb")
 	containsPort = string.find(msg, "port")
 	return containsWtb and containsPort
+end
+
+function canInvite()
+	return not IsInGroup(1) or UnitIsGroupLeader(MV.PlayerName)
 end
