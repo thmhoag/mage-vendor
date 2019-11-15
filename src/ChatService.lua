@@ -1,25 +1,12 @@
 local _, Addon = ...
 
-local frame, events = CreateFrame("Frame"), {};
-function onLoad()
-	frame:SetScript("OnEvent", function(self, event, ...)
-		events[event](self, ...);
-	end);
+local MV = MageVendor
+local Events = MV.Events
 
-	for e, v in pairs(events) do
-		frame:RegisterEvent(e); -- Register all events for which handlers have been defined
-	end
-end 
-
-local ChatService = CreateFrame("Frame");
-ChatService:SetScript("OnEvent", function(self, event, ...)
-	if self[event] then
-		self[event](self, ...);
-	end
-end);
-
-function events:CHAT_MSG_SAY(...)
+function Events:CHAT_MSG_SAY(...)
 	local timestamp = time()
+
+	if not MV.Options.Enabled then return end
 	if not select(12, ...) then return end -- don't use player-less chat events
 
 	playerInfo = {GetPlayerInfoByGUID(select(12, ...))}
@@ -30,8 +17,7 @@ function events:CHAT_MSG_SAY(...)
 	end
 
 	playerName = playerInfo[6]
-	DEFAULT_CHAT_FRAME:AddMessage("Player " .. playerName .. " wants port!");
-
+	MV:Msg("Player " .. playerName .. " wants port!")
 	InviteUnit(playerName)
 end
 
@@ -42,5 +28,3 @@ function checkWantsPort(msg)
 	containsPort = string.find(msg, "port")
 	return containsWtb and containsPort
 end
-
-onLoad()

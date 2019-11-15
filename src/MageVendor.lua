@@ -1,54 +1,35 @@
-local AddonName, Addon = ...
-local version = "0.1.0";
+MageVendor = {
+    Name = GetAddOnMetadata("MageVendor", "Title"),
+	Version = GetAddOnMetadata("MageVendor", "Version"),
+	Events = {},
+	Options = {}
+}
 
-BINDING_HEADER_LFGKEYBINDINGS = "MageVendor"
+local MV = MageVendor
 
-function onLoad()
-
-	InitEvents()
-
-	SLASH_MageVendor1 = "/magevendor";
-	SLASH_MageVendor2 = "/mv";
-	SlashCmdList["MageVendor"] = MageVendor_SlashHandler;
-
-	Addon.debug = false
-	Addon.name = AddonName
-
-	Addon.isInitialized = true
+function MV:Msg(msg)
+    DEFAULT_CHAT_FRAME:AddMessage("\124cff00FF00[" .. self.Name .. "]\124r " .. msg)
 end
 
-local cmds = {};
-function MageVendor_SlashHandler(msg)
-    if(msg ~= "") then msg = string.lower(msg) end;
-    if(not cmds[msg]) then 
-		cmds["default"]();
-		return;
+function MV:AnnounceStatus()
+    if MV.Options.Enabled then
+        MV:Msg("Enabled!")
+    else
+        MV:Msg("Disabled!")
+    end
+end
+
+function MV.Events.ADDON_LOADED(self, ...)
+    local name = (select(1, ...))
+    if name ~= MV.Name then return end
+    if type(_G["MAGEVENDOR"]) ~= "table" then
+        _G["MAGEVENDOR"] = {}
+    end
+    self.Options = _G["MAGEVENDOR"]
+    if type(self.Options.Enabled) ~= "boolean" then
+        self.Options.Enabled = false
 	end
 
-    cmds[msg]();
+    self.PlayerName = UnitName("player")
+    self:Msg("AddOn Loaded! - v" .. self.Version)
 end
-
-function cmds:default(...)
-    DEFAULT_CHAT_FRAME:AddMessage("MageVendor: v" .. version);
-end
-
-function cmds:show(...)
-    DEFAULT_CHAT_FRAME:AddMessage("MageVendor: show doesn't work just yet");
-end
-
-local frame, events = CreateFrame("Frame"), {};
-function InitEvents()
-	frame:SetScript("OnEvent", function(self, event, ...)
-		events[event](self, ...);
-	end);
-
-	for e, v in pairs(events) do
-		frame:RegisterEvent(e); -- Register all events for which handlers have been defined
-	end
-end 
-
-function events:PLAYER_ENTERING_WORLD(...)
-	DEFAULT_CHAT_FRAME:AddMessage("MageVendor loaded");
-end
-
-onLoad()

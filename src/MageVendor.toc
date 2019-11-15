@@ -1,7 +1,10 @@
 ## Title: MageVendor
-## Version: 1.0
+## Version: 0.1.0
 ## Author: Thomas Hoag
 ## Interface: 11302
 
 MageVendor.lua
 ChatService.lua
+Cmd.lua
+Tools.lua
+Events.lua
