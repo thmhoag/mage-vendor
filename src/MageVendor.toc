@@ -7,4 +7,5 @@ MageVendor.lua
 ChatService.lua
 Cmd.lua
 Tools.lua
+Options.lua
 Events.lua

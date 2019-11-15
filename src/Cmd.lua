@@ -55,6 +55,7 @@ Cmd:Register({"help", "h"}, function(args)
     MV:Msg("Welcome to MageVendor!")
     MV:Msg("/mv toggle - Toggle on/off")
     MV:Msg("/mv status - Print current status")
+    MV:Msg("/mv options - Open the config settings")
     MV:Msg("/mv version - Print version")
     MV:Msg("/mv help - Print this help message")
 end)
@@ -77,6 +78,10 @@ end)
 
 Cmd:Register({"status"}, function(args)
     MV:AnnounceStatus()
+end)
+
+Cmd:Register({"options", "opt", "config", "conf"}, function(args)
+    MV.OptionsFrame:Open()
 end)
 
 for i,v in ipairs(Cmd.Slash) do
