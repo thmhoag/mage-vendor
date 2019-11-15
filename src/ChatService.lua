@@ -49,8 +49,8 @@ end
 function checkWantsPort(msg)
 	if(msg ~= "") then msg = string.lower(msg) end;
 	
-	containsWtb = string.find(msg, "wtb")
-	containsPort = string.find(msg, "port")
+	containsWtb = string.match(msg, "wtb") ~= nil
+	containsPort = string.match(msg, "port") ~= nil
 	return containsWtb and containsPort
 end
 
