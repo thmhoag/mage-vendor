@@ -46,14 +46,6 @@ function processChat(...)
 	InviteUnit(playerName)
 end
 
-function checkWantsPort(msg)
-	if(msg ~= "") then msg = string.lower(msg) end;
-	
-	containsWtb = string.match(msg, "wtb") ~= nil
-	containsPort = string.match(msg, "port") ~= nil
-	return containsWtb and containsPort
-end
-
 function canInvite()
 	return not IsInGroup(1) or UnitIsGroupLeader(MV.PlayerName)
 end
@@ -62,4 +54,71 @@ function markSelf(...)
 	if not MV.Options.MarkWhenGrouped then return end
 
 	SetRaidTarget("player", 8)
+end
+
+local buyPhrases = {
+	"wtb",
+	"can i get",
+	"plz",
+	"pls",
+	"please",
+	"buy",
+	"lf",
+	"need",
+	"want"
+}
+
+local function msgContainsWtbPhrase(msg)
+	for _, p in ipairs(buyPhrases) do
+		if string.match(msg, p) ~= nil then
+			return true
+		end
+	end
+
+	return false
+end
+
+local portPhrases = {
+	"port",
+	"tele",
+	"teleport",
+	"org",
+	"orgimmar",
+	"tb",
+	"thunder bluff",
+	"uc",
+	"undercity"
+}
+
+local function msgContainsPortPhrase(msg)
+	for _, p in ipairs(portPhrases) do
+		if string.match(msg, p) ~= nil then
+			return true
+		end
+	end
+
+	return false
+end
+
+local blackListedPhrases = {
+	"wts"
+}
+
+local function msgContainsBlackListedPhrase(msg)
+	for _, p in ipairs(blackListedPhrases) do
+		if string.match(msg, p) ~= nil then
+			return true
+		end
+	end
+
+	return false
+end
+
+function checkWantsPort(msg)
+	if(msg ~= "") then msg = string.lower(msg) end;
+	
+	containsWtb = msgContainsWtbPhrase(msg)
+	containsPort = msgContainsPortPhrase(msg)
+	containsBlackListed = msgContainsBlackListedPhrase(msg)
+	return containsWtb and containsPort and not containsBlackListed
 end
