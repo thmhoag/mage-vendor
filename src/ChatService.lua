@@ -82,11 +82,11 @@ local portPhrases = {
 	"port",
 	"tele",
 	"teleport",
-	"org",
+	" org",
 	"orgimmar",
-	"tb",
+	" tb",
 	"thunder bluff",
-	"uc",
+	" uc",
 	"undercity"
 }
 
