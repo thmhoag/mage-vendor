@@ -59,8 +59,16 @@ function Opt:Show()
         end)
     mvEnabled:SetPoint("TOPLEFT", title, "BOTTOMLEFT", -2, -16)
 
+    local markWhenGrouped = checkbox("Mark When Grouped",
+        "Mark self with a SKULL icon when a group is formed to let other players see your location",
+        function(check, checked)
+            MV.Options.MarkWhenGrouped = checked
+        end)
+        markWhenGrouped:SetPoint("TOPLEFT", mvEnabled, "BOTTOMLEFT", 0, -8)
+
     local function init()
         mvEnabled:SetChecked(MV.Options.Enabled)
+        markWhenGrouped:SetChecked(MV.Options.MarkWhenGrouped)
     end
 
     init()

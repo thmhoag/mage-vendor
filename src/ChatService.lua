@@ -15,6 +15,10 @@ function Events:CHAT_MSG_WHISPER(...)
 	processChat(...)
 end
 
+function Events:GROUP_JOINED(...)
+	markSelf(...)
+end
+
 function processChat(...)
 	local timestamp = time()
 
@@ -52,4 +56,10 @@ end
 
 function canInvite()
 	return not IsInGroup(1) or UnitIsGroupLeader(MV.PlayerName)
+end
+
+function markSelf(...)
+	if not MV.Options.MarkWhenGrouped then return end
+
+	SetRaidTarget("player", 8)
 end

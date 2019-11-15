@@ -1,7 +1,9 @@
+## Interface: 11302
 ## Title: MageVendor
+## Notes: Automates mage-as-a-service functions such as porting/water/food.
 ## Version: 0.1.0
 ## Author: Thomas Hoag
-## Interface: 11302
+## SavedVariables: MAGEVENDOR
 
 MageVendor.lua
 ChatService.lua

@@ -30,8 +30,12 @@ function MV.Events.ADDON_LOADED(self, ...)
         _G["MAGEVENDOR"] = {}
     end
     self.Options = _G["MAGEVENDOR"]
-    if type(self.Options.Enabled) ~= "boolean" then
-        self.Options.Enabled = false
+
+    -- always start disabled for now
+    self.Options.Enabled = false
+
+    if type(self.Options.MarkWhenGrouped) ~= "boolean" then
+        self.Options.MarkWhenGrouped = true
 	end
 
     self.PlayerName = UnitName("player")
