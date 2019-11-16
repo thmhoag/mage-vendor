@@ -51,6 +51,7 @@ function canInvite()
 end
 
 function markSelf(...)
+	if not MV.Options.Enabled then return end
 	if not MV.Options.MarkWhenGrouped then return end
 
 	SetRaidTarget("player", 8)
