@@ -8,7 +8,7 @@ MageVendor = {
 local MV = MageVendor
 
 function MV:Msg(msg)
-    DEFAULT_CHAT_FRAME:AddMessage("\124cff40E0D0[" .. self.Name .. "]\124r " .. msg)
+    DEFAULT_CHAT_FRAME:AddMessage("\124cff1E90FF[" .. self.Name .. "]\124r " .. msg)
 end
 
 function MV:Error(msg)
