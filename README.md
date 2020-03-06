@@ -2,7 +2,7 @@
 A World of Warcraft Classic addon for automating portal/water sales.
 
 ```bash
-    Welcome to MageVendor!
+  Welcome to MageVendor!
     /mv toggle - Toggle on/off
     /mv status - Print current status
     /mv options - Open the config settings
