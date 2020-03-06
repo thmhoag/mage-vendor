@@ -1,3 +1,5 @@
+**WARNING:** *This addon is no longer being actively developed*
+
 # MageVendor
 A World of Warcraft Classic addon for automating portal/water sales.
 
